@@ -17,28 +17,28 @@ def printGraph(g):
     print()
 
 
-G1 = None
+G = None
 stack = []
-visitedAry = []
+visited_ary = []
 
-G1 = Graph(4)
-G1.graph[0][2] = 1; G1.graph[0][3] = 1
-G1.graph[1][2] = 1
-G1.graph[2][0] = 1; G1.graph[2][1] = 1; G1.graph[2][3] = 1
-G1.graph[3][0] = 1; G1.graph[3][2] = 1
+G = Graph(4)
+G.graph[0][2] = 1; G.graph[0][3] = 1
+G.graph[1][2] = 1
+G.graph[2][0] = 1; G.graph[2][1] = 1; G.graph[2][3] = 1
+G.graph[3][0] = 1; G.graph[3][2] = 1
 
 print("## Undirected Graph ##")
-printGraph(G1)
+printGraph(G)
 
 current = 0
 stack.append(current)
-visitedAry.append(current)
+visited_ary.append(current)
 
 while len(stack) != 0:
     next = None
     for vertex in range(4):
-        if G1.graph[current][vertex] == 1:
-            if vertex in visitedAry:
+        if G.graph[current][vertex] == 1:
+            if vertex in visited_ary:
                 pass
             else:
                 next = vertex
@@ -47,10 +47,10 @@ while len(stack) != 0:
     if next is not None:
         current = next
         stack.append(current)
-        visitedAry.append(current)
+        visited_ary.append(current)
     else:
         current = stack.pop()
 
 print('방문 순서 -->', end=' ')
-for i in visitedAry:
+for i in visited_ary:
     print(chr(ord('A') + i), end=" ")
