@@ -1,36 +1,29 @@
-def printPoly(t_x, p_x):
-    polyStr = "P(x) = "
-
-    for i in range(len(p_x)):
-        degree = t_x[i]  # 항 차수
-        coefficient = p_x[i]  # 계수
-
-        if coefficient >= 0:
-            polyStr += "+"
-        polyStr += str(coefficient) + "x^" + str(degree) + " "
-
-    return polyStr
+class Node:
+    def __init__(self):
+        self.data = None
+        self.link = None
 
 
-def calcPoly(x_val, _x):
-    retValue = 0
-
-    for i in range(len(_x[0])):
-        degree = _x[0][i]
-        coefficient = _x[1][i]
-        retValue += coefficient * x_val ** degree
-
-    return retValue
+def print_arr(Head):
+    print(Head.data, end='')
+    while Head.link is not None:
+        Head = Head.link
+        print(Head.data, end='')
+    print()
 
 
-x = [[300, 20, 0],
-     [7, -4, 5]]
+current = None
 
-if __name__ == "__main__":
-    pStr = printPoly(x[0], x[1])
-    print(pStr)
+name = input("Name--> ")
+while name != '':
+    mail = input("Mail--> ")
 
-    xValue = int(input("X 값-->"))
+    new_node = Node()
+    new_node.data = [name, mail]
 
-    pxValue = calcPoly(xValue, x)
-    print(pxValue)
+    if current is not None:
+        new_node.link = current
+    current = new_node
+    print_arr(current)
+
+    name = input("Name--> ")
