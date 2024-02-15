@@ -1,24 +1,22 @@
 import random
 
 
-def findInsertIdx(ary, data):
-    find_idx = -1
-    for i in range(0, len(ary)):
-        if ary[i] > data:
-            find_idx = i
+def bubble_sort(arr):
+    n = len(arr)
+    for end in range(n - 1, 0, -1):
+        is_changed = False
+        for cur in range(end):
+            if arr[cur] > arr[cur + 1]:
+                arr[cur], arr[cur + 1] = arr[cur + 1], arr[cur]
+                is_changed = True
+        if not is_changed:
             break
-    if find_idx == -1:
-        return len(ary)
-    else:
-        return find_idx
+    return arr
 
 
-before = [random.randint(1, 200) for _ in range(10)]
-after = []
+data_arr = [random.randint(0, 200) for _ in range(20)]
 
-print('정렬 전 -->', before)
-for i in range(len(before)):
-    data = before[i]
-    insPos = findInsertIdx(after, data)
-    after.insert(insPos, data)
-print('정렬 후 -->', after)
+
+print(f"before sorting: {data_arr}")
+bubble_sort(data_arr)
+print(f"after sorting: {data_arr}")
