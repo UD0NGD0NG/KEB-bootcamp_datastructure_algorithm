@@ -1,33 +1,36 @@
-def insert(position, friend, frequency):
-    global kakao
-    kakao.append(None)
-    _len = len(kakao)
+def printPoly(t_x, p_x):
+    polyStr = "P(x) = "
 
-    for i in range(_len - 1, position, -1):
-        kakao[i] = kakao[i - 1]
+    for i in range(len(p_x)):
+        degree = t_x[i]  # 항 차수
+        coefficient = p_x[i]  # 계수
 
-    kakao[position] = (friend, frequency)
+        if coefficient >= 0:
+            polyStr += "+"
+        polyStr += str(coefficient) + "x^" + str(degree) + " "
+
+    return polyStr
 
 
-kakao = [('DH', 200), ('JY', 150), ("ZW", 90), ('SN', 30), ('JH', 15)]
-is_add = False
+def calcPoly(x_val, _x):
+    retValue = 0
 
-while (True):
-    new_friend = input("friend to add--> ")
+    for i in range(len(_x[0])):
+        degree = _x[0][i]
+        coefficient = _x[1][i]
+        retValue += coefficient * x_val ** degree
 
-    if new_friend == 'Stop':
-        break
+    return retValue
 
-    new_frequency = int(input("how many--> "))
 
-    is_add = False
-    for n in range(len(kakao)):
-        if new_frequency >= kakao[n][1]:
-            insert(n, new_friend, new_frequency)
-            is_add = True
-            break
+x = [[300, 20, 0],
+     [7, -4, 5]]
 
-    if not is_add:
-        kakao.append((new_friend, new_frequency))
+if __name__ == "__main__":
+    pStr = printPoly(x[0], x[1])
+    print(pStr)
 
-    print(kakao)
+    xValue = int(input("X 값-->"))
+
+    pxValue = calcPoly(xValue, x)
+    print(pxValue)
