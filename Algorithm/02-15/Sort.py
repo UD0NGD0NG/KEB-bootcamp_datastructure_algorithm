@@ -1,22 +1,25 @@
 import random
 
 
-def bubble_sort(arr):
+def quick_sort(arr):
     n = len(arr)
-    for end in range(n - 1, 0, -1):
-        is_changed = False
-        for cur in range(end):
-            if arr[cur] > arr[cur + 1]:
-                arr[cur], arr[cur + 1] = arr[cur + 1], arr[cur]
-                is_changed = True
-        if not is_changed:
-            break
-    return arr
+    if n <= 1:
+        return arr
+
+    mid = arr[n // 2]
+    left, right = [], []
+
+    for num in arr:
+        if num < mid:
+            left.append(num)
+        elif num > mid:
+            right.append(num)
+
+    return quick_sort(left) + [mid] + quick_sort(right)
 
 
-data_arr = [random.randint(0, 200) for _ in range(20)]
+data_ary = [random.randint(0, 200) for _ in range(20)]
 
-
-print(f"before sorting: {data_arr}")
-bubble_sort(data_arr)
-print(f"after sorting: {data_arr}")
+print('정렬 전 -->', data_ary)
+data_ary = quick_sort(data_ary)
+print('정렬 후 -->', data_ary)
