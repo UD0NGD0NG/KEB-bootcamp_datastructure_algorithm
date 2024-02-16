@@ -1,69 +1,51 @@
-import random
+def is_full():
+    global top, size
+    if top >= size - 1:
+        return True
+    return False
 
 
-class Node:
-    def __init__(self):
-        self.data = None
-        self.link = None
+def is_empty():
+    global size
+    if top == -1:
+        return True
+    return False
 
 
-def insert_node(_head, _data):
-    global cnt, head
+def push(data):
+    global Stack, top, size
 
-    if _head.link is None:
-        if _head.data == _data:
-            pass
-        elif _data < _head.data:
-            new_node = Node()
-            new_node.data = _data
-            new_node.link = _head
-            head = new_node
-            cnt += 1
-        else:
-            new_node = Node()
-            new_node.data = _data
-            _head.link = new_node
-            cnt += 1
-
+    if is_full():
+        print("FULL")
     else:
-        while _head.link is not None:
-            if _data == _head.data:
-                break
-
-            if _data < _head.data:
-                new_node = Node()
-                new_node.data = _data
-                new_node.link = _head
-                if head == _head:
-                    head = new_node
-                cnt += 1
-                break
-            else:
-                if _data < _head.link.data:
-                    new_node = Node()
-                    new_node.data = _data
-                    new_node.link = _head.link
-                    _head.link = new_node
-                    cnt += 1
-                    break
-                else:
-                    _head = _head.link
+        top += 1
+        Stack[top] = data
 
 
-def print_list(_head):
-    print(_head.data, end=' ')
-    while _head.link is not None:
-        _head = _head.link
-        print(_head.data, end=' ')
+def pop():
+    global Stack, top, size
+    if is_empty():
+        print("EMPTY")
+    else:
+        print(Stack[top], end='')
+        Stack[top] = None
+        top -= 1
 
 
-new_node = Node()
-new_node.data = random.randint(1, 45)
-head = new_node
-cnt = 1
+Stack = [None, None, None, None, None, None]
+top = -1
+size = 6
 
-while cnt != 6:
-    new_data = random.randint(1, 45)
-    insert_node(head, new_data)
 
-print_list(head)
+print("Go to snack house: ", end='')
+while not is_full():
+    stone = input()
+    push(stone)
+    print("-->", end='')
+print("snack house")
+
+print("Go to my home: ", end='')
+while not is_empty():
+    pop()
+    print("-->", end='')
+print("my home")
