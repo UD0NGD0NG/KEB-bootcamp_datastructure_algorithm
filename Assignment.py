@@ -1,51 +1,39 @@
-def is_full():
-    global top, size
-    if top >= size - 1:
-        return True
-    return False
-
-
 def is_empty():
-    global size
-    if top == -1:
+    global front, tail
+    if front == tail:
         return True
     return False
 
 
-def push(data):
-    global Stack, top, size
-
-    if is_full():
-        print("FULL")
-    else:
-        top += 1
-        Stack[top] = data
+def is_full():
+    global size, tail
+    if tail == size - 1:
+        return True
+    return False
 
 
-def pop():
-    global Stack, top, size
+def deQueue():
+    global Queue, size, front, tail
     if is_empty():
         print("EMPTY")
     else:
-        print(Stack[top], end='')
-        Stack[top] = None
-        top -= 1
+        front += 1
+        data = Queue[0]
+        for i in range(size - 1):
+            Queue[i] = Queue[i + 1]
+        Queue[size - 1] = None
+        return data
 
 
-Stack = [None, None, None, None, None, None]
-top = -1
-size = 6
+Queue = ['JK', 'V', 'JM', 'J', "SG"]
+size = len(Queue)
+front = -1
+tail = 4
 
-
-print("Go to snack house: ", end='')
-while not is_full():
-    stone = input()
-    push(stone)
-    print("-->", end='')
-print("snack house")
-
-print("Go to my home: ", end='')
 while not is_empty():
-    pop()
-    print("-->", end='')
-print("my home")
+    print(f"Waiting line: {Queue}")
+    data = deQueue()
+    print(f"{data} is entrance")
+
+print(f"Waiting line: {Queue}")
+print("Restaurant closed!")
