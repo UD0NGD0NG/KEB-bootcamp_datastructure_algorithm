@@ -1,39 +1,29 @@
-def is_empty():
-    global front, tail
-    if front == tail:
-        return True
-    return False
+def print_graph():
+    global Graph, conveni
+
+    print("     ", end="    ")
+    for data in conveni:
+        print(f"{data[0]}", end="   ")
+    print()
+
+    for row in range(len(conveni)):
+        print(f"{conveni[row][0]:<8}", end='')
+        for col in range(len(Graph[row])):
+            print(f"{Graph[row][col]:>6}", end=' ')
+        print()
 
 
-def is_full():
-    global size, tail
-    if tail == size - 1:
-        return True
-    return False
+Graph = [[0, 1, 1, 0, 0],
+         [1, 0, 1, 1, 0],
+         [1, 1, 0, 1, 0],
+         [0, 1, 1, 0, 1],
+         [0, 0, 0, 1, 0]]
+conveni = [["GS25", 30], ["CU", 60], ["Seven11", 10], ["MiniStop", 90], ["Emart24", 40]]
 
+max = conveni[0]
+for data in conveni:
+    if max[1] < data[1]:
+        max = data
 
-def deQueue():
-    global Queue, size, front, tail
-    if is_empty():
-        print("EMPTY")
-    else:
-        front += 1
-        data = Queue[0]
-        for i in range(size - 1):
-            Queue[i] = Queue[i + 1]
-        Queue[size - 1] = None
-        return data
-
-
-Queue = ['JK', 'V', 'JM', 'J', "SG"]
-size = len(Queue)
-front = -1
-tail = 4
-
-while not is_empty():
-    print(f"Waiting line: {Queue}")
-    data = deQueue()
-    print(f"{data} is entrance")
-
-print(f"Waiting line: {Queue}")
-print("Restaurant closed!")
+print_graph()
+print(f"max conveni: {max[0]}, max count: {max[1]}")
